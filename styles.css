@@ -1439,3 +1439,200 @@ img {
         stroke-dashoffset: 0;
     }
 }
+
+/* =========================================
+   MOBILE RESPONSIVENESS FIXES (< 768px)
+   ========================================= */
+@media screen and (max-width: 768px) {
+
+    /* --- Global Layout --- */
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding: 0 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .section {
+        padding: 60px 0;
+        /* Reduced vertical padding */
+    }
+
+    .section-title {
+        font-size: 2rem !important;
+        /* Smaller titles */
+        word-wrap: break-word;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        height: 100vh;
+        /* Allow dynamic height on mobile browsers */
+        min-height: 100vh;
+        background-position: center bottom;
+    }
+
+    .hero__content {
+        align-items: center;
+        /* Center content on mobile */
+        text-align: center;
+        padding-left: 0;
+        padding-bottom: 120px;
+        /* Space for bottom bar of browser */
+        justify-content: center;
+    }
+
+    .hero__buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero__status-block {
+        display: none;
+        /* Hide status block on mobile if it clutters */
+        /* Or keep it but scale it down: */
+        /* font-size: 0.7rem; padding: 10px 20px; */
+    }
+
+    /* Text Layers - Scale Down */
+    .hero__layer {
+        font-size: 15vw;
+        /* Slightly smaller to fit width */
+        width: 100%;
+    }
+
+    .hero__layer--back {
+        top: 25%;
+    }
+
+    .hero__layer--middle,
+    .hero__layer--front {
+        top: 45%;
+    }
+
+    .hero__image-container {
+        width: 100%;
+        height: 60%;
+        /* Show less image */
+        bottom: 0;
+        right: 0;
+        opacity: 0.6;
+        /* Fade image slightly to make text readable */
+    }
+
+    /* --- Legend Section --- */
+    .legend__grid {
+        grid-template-columns: 1fr;
+        /* Stack columns */
+        gap: 40px;
+    }
+
+    .legend__column {
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .legend__column::before {
+        /* Move dash to top center */
+        left: 50%;
+        transform: translateX(-50%);
+        top: -20px;
+        width: 24px;
+        height: 4px;
+        /* Horizontal dash */
+    }
+
+    /* --- Biography Section --- */
+    .biography__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .biography__photo {
+        order: -1;
+        /* Show photo first (optional) or last */
+        display: none;
+        /* Often cleaner to hide large bio photo on mobile, or keep distinct */
+    }
+
+    .biography__summary h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    /* --- Entrepreneur Section --- */
+    .entrepreneur-3d-wrapper {
+        padding: 20px 0;
+    }
+
+    .entrepreneur__text-border {
+        transform: none !important;
+        /* Disable 3D tilt on mobile for readability */
+        margin: 0 10px;
+    }
+
+    /* --- Books Section --- */
+    .books__grid {
+        gap: 40px;
+    }
+
+    .book-card {
+        width: 100%;
+        max-width: 320px;
+        /* Full width cards */
+        height: auto;
+        aspect-ratio: 2/3;
+    }
+
+    /* --- Mentions & Media --- */
+    .mentions-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .mentions-image-wrapper {
+        margin: 0 auto;
+        /* Center image */
+        max-width: 80%;
+    }
+
+    .mentions-content {
+        text-align: center;
+    }
+
+    .media__links {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* --- Contacts --- */
+    .contacts__container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .contacts__info {
+        order: 2;
+        /* Form first? or Info first? Keep natural order */
+    }
+
+    .contacts__icons-row {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* --- Contact Form --- */
+    .contact-form {
+        padding: 30px 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        /* Stack inputs */
+    }
+}
