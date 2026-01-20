@@ -1594,76 +1594,104 @@ img {
         /* Center nested flex items */
     }
 }
-/* Mobile Menu Links - Uiverse Text Fill Style (Solid Base) */
+
+/* Mobile Menu Links - Uiverse Text Fill Style (Double Pseudo Fixed) */
 .mobile-menu__link {
-    /* Base Button Style */
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 25px;
+    /* Neater padding */
     text-transform: uppercase;
     text-decoration: none;
-    font-weight: 900;
-    font-size: 26px;
+    font-weight: 800;
+    /* Bold but legible */
+    font-size: 20px;
+    /* Reduced from 26px as requested */
     font-family: var(--font-heading);
     background: transparent;
-    margin: 10px 0;
+    margin: 8px 0;
+    /* Tighter spacing */
     border: none;
     cursor: pointer;
     letter-spacing: 2px;
-    
-    /* User Requested Styles */
-    --border-right: 6px;
-    --text-stroke-color: rgba(255, 255, 255, 0.6);
-    --animation-color: var(--accent); /* Our RED */
-    
-    /* Base State: Solid White Text */
-    color: #fff; 
+
+    /* Layout */
+    color: transparent;
+    /* Hide DOM text to prevent misalignment */
     -webkit-text-stroke: 0;
+
+    /* Variables */
+    --border-right: 4px;
+    /* Thinner border for smaller font */
+    --animation-color: var(--accent);
 }
 
-/* The Hover Overlay (Red Text) */
+/* Layer 1: Base Text (Solid White) */
+.mobile-menu__link::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    /* Cover entire button */
+
+    /* Alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Appearance */
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+/* Layer 2: Hover Text (Red Fill) */
 .mobile-menu__link::after {
     content: attr(data-text);
     position: absolute;
     left: 0;
-    top: 50%; /* Center properly */
-    transform: translateY(-50%); /* Center properly */
-    
-    /* Box Model */
-    box-sizing: border-box;
-    width: 0%;
-    height: 100%; /* Ensure it covers height */
-    
-    /* Text Styles */
-    color: var(--animation-color);
-    -webkit-text-stroke: 1px var(--animation-color);
-    
-    /* Border & Layout */
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    white-space: nowrap; /* Prevent wrapping */
-    
-    /* Animation */
-    transition: 0.5s;
-    
-    /* Fit positioning */
+    top: 0;
+    bottom: 0;
+    /* Match height */
+
+    /* Box & Alignment */
     display: flex;
     align-items: center;
-    padding: 10px 20px; /* Match parent padding */
-    inset: 0; /* Cover entire parent */
-    width: 0%; /* Start closed */
+    justify-content: center;
+    /* Center text within the width? No, this clip needs to match */
+    /* If we center text in a growing box, it moves. 
+       We need the text to remain static but hidden.
+       Actually, `width` animation on a centered flex item chops visually.
+       Better: Use `clip-path` or `max-width` on a full-width container.
+       
+       Let's use `clip-path: inset(0 100% 0 0)` -> `inset(0 0 0 0)`.
+       This allows the Red layer to be full width (centered) but revealed from left.
+    */
+    width: 100%;
+
+    /* Appearance */
+    color: var(--animation-color);
+    background: transparent;
+
+    /* Border */
+    border-right: var(--border-right) solid var(--animation-color);
+
+    /* Masking mechanism */
+    clip-path: inset(0 100% 0 0);
+    /* Hidden from right */
+    transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+
+    z-index: 2;
 }
 
 /* Hover State */
 .mobile-menu__link:hover::after {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color));
+    clip-path: inset(0 0 0 0);
+    /* Fully visible */
+    filter: drop-shadow(0 0 15px var(--animation-color));
 }
 
 /* Cleanup */
-.mobile-menu__link::before {
-    display: none;
-}
 .mobile-menu__link span {
     display: none;
 }
