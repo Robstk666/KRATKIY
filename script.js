@@ -193,4 +193,31 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dispatchEvent(new Event('scroll'));
     }
 
+    // --- Active Link Highlighter (Mobile Menu) ---
+    const sections = document.querySelectorAll('section'); // Assuming standard sections
+    const navLinks = document.querySelectorAll('.mobile-menu__link');
+
+    const activeLinkObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remove active from all
+                navLinks.forEach(link => link.classList.remove('active'));
+
+                // Add active to current
+                const id = entry.target.getAttribute('id');
+                const activeLink = document.querySelector(`.mobile-menu__link[href="#${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        });
+    }, {
+        threshold: 0.25, // Trigger when 25% visible
+        rootMargin: "-10% 0px -50% 0px" // Adjusted for middle-screen focus
+    });
+
+    sections.forEach(section => {
+        activeLinkObserver.observe(section);
+    });
+
 });

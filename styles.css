@@ -1607,28 +1607,35 @@ img {
 .mobile-menu__link span {
     display: none;
 }
+
 /* Mobile Menu Links - Uiverse Text Fill Style (Double Pseudo Fixed) */
 .mobile-menu__link {
     position: relative;
     display: inline-block;
-    padding: 10px 20px; /* Neater, tighter padding */
+    padding: 10px 20px;
+    /* Neater, tighter padding */
     text-transform: uppercase;
     text-decoration: none;
-    font-weight: 800; /* Bold but legible */
-    font-size: 18px; /* Reduced to 18px as requested ("akkuratnee") */
+    font-weight: 800;
+    /* Bold but legible */
+    font-size: 18px;
+    /* Reduced to 18px as requested ("akkuratnee") */
     font-family: var(--font-heading);
     background: transparent;
-    margin: 8px 0; /* Tighter spacing */
+    margin: 8px 0;
+    /* Tighter spacing */
     border: none;
     cursor: pointer;
     letter-spacing: 2px;
-    
+
     /* Layout */
-    color: transparent; /* Hide DOM text to prevent misalignment */
+    color: transparent;
+    /* Hide DOM text to prevent misalignment */
     -webkit-text-stroke: 0;
-    
+
     /* Variables */
-    --border-right: 4px; /* Used for border width */
+    --border-right: 4px;
+    /* Used for border width */
     --animation-color: var(--accent);
 }
 
@@ -1636,13 +1643,14 @@ img {
 .mobile-menu__link::before {
     content: attr(data-text);
     position: absolute;
-    inset: 0; /* Cover entire button */
-    
+    inset: 0;
+    /* Cover entire button */
+
     /* Alignment */
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     /* Appearance */
     color: #fff;
     white-space: nowrap;
@@ -1656,32 +1664,36 @@ img {
     position: absolute;
     left: 0;
     top: 0;
-    bottom: 0; /* Match height */
-    
+    bottom: 0;
+    /* Match height */
+
     /* Box & Alignment */
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     width: 100%;
-    
+
     /* Appearance */
     color: var(--animation-color);
     background: transparent;
-    
+
     /* Border - SWITCHED TO LEFT */
     border-left: var(--border-right) solid var(--animation-color);
     border-right: none;
-    
+
     /* Masking mechanism */
-    clip-path: inset(0 100% 0 0); /* Hidden from right */
+    clip-path: inset(0 100% 0 0);
+    /* Hidden from right */
     transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    
+
     z-index: 2;
 }
 
-/* Hover State */
-.mobile-menu__link:hover::after {
-    clip-path: inset(0 0 0 0); /* Fully visible */
+/* Hover & Active State */
+.mobile-menu__link:hover::after,
+.mobile-menu__link.active::after {
+    clip-path: inset(0 0 0 0);
+    /* Fully visible */
     filter: drop-shadow(0 0 15px var(--animation-color));
 }
 
