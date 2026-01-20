@@ -1505,26 +1505,37 @@ img {
     }
 
     .hero__layer--back {
-        top: 20%;
-        /* Moved higher */
+        top: 18%;
+        /* Moved slightly higher to make room */
     }
 
     .hero__layer--middle,
     .hero__layer--front {
-        top: 26%;
-        /* Moved higher and closer to 'ANDREI' */
-        line-height: 0.9;
-        /* Tighter line height to reduce visual gap */
+        top: 28%;
+        /* Move down to create separation from 'ANDREI' */
+        line-height: normal;
+        /* Restore normal line height */
     }
 
     .hero__image-container {
         width: 100%;
-        height: 85%;
-        /* Significantly larger */
+        height: 92%;
+        /* Maximize size almost to top */
         bottom: 0;
         right: 0;
         opacity: 1;
-        /* Fully visible */
+        /* Ensure image is anchored to right/bottom but huge */
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    .hero__image-container img {
+        height: 100%;
+        width: auto;
+        /* Maintain aspect ratio */
+        object-fit: contain;
+        object-position: bottom center;
     }
 
     /* --- Legend Section --- */
