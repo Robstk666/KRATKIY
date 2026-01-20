@@ -1644,6 +1644,10 @@ img {
         /* Move ABOVE form */
     }
 
+    .contacts__info .section-title {
+        text-align: center !important;
+    }
+
     .contacts__icons-row {
         justify-content: center;
         flex-wrap: wrap;
