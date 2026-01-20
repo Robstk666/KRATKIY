@@ -1570,10 +1570,11 @@ img {
     }
 
     .biography__photo {
-        order: -1;
-        /* Show photo first (optional) or last */
-        display: none;
-        /* Often cleaner to hide large bio photo on mobile, or keep distinct */
+        order: 2;
+        /* Move photo below text */
+        display: block;
+        /* Show photo again! */
+        margin-top: 20px;
     }
 
     .biography__summary h3 {
@@ -1589,13 +1590,9 @@ img {
     .entrepreneur__text-border {
         /* transform: handled by JS now */
         margin: 0 auto;
-        /* Centered */
         padding: 3px;
-        /* Ensure padding for border visibility */
         overflow: hidden;
-        /* Ensure clip */
         width: 90%;
-        /* Ensure it fits on mobile */
     }
 
     /* --- Books Section --- */
@@ -1606,7 +1603,6 @@ img {
     .book-card {
         width: 100%;
         max-width: 320px;
-        /* Full width cards */
         height: auto;
         aspect-ratio: 2/3;
     }
@@ -1617,9 +1613,13 @@ img {
         text-align: center;
     }
 
+    .mentions-content .section-title {
+        text-align: center !important;
+        /* Force center alignment */
+    }
+
     .mentions-image-wrapper {
         margin: 0 auto;
-        /* Center image */
         max-width: 80%;
     }
 
@@ -1640,8 +1640,8 @@ img {
     }
 
     .contacts__info {
-        order: 2;
-        /* Form first? or Info first? Keep natural order */
+        order: -1;
+        /* Move ABOVE form */
     }
 
     .contacts__icons-row {
@@ -1650,13 +1650,16 @@ img {
         gap: 20px;
     }
 
-    /* --- Contact Form --- */
-    .contact-form {
-        padding: 30px 20px;
+    /* --- Footer --- */
+    .footer .container {
+        flex-direction: column;
+        justify-content: center !important;
+        text-align: center;
+        gap: 20px;
     }
 
-    .form-row {
-        grid-template-columns: 1fr;
-        /* Stack inputs */
+    .footer .container>div {
+        align-items: center;
+        /* Center nested flex items */
     }
 }
