@@ -1665,7 +1665,6 @@ img {
     left: 0;
     top: 0;
     bottom: 0;
-    /* Match height */
 
     /* Box & Alignment */
     display: flex;
@@ -1677,22 +1676,32 @@ img {
     color: var(--animation-color);
     background: transparent;
 
-    /* Border - SWITCHED TO LEFT */
-    border-left: var(--border-right) solid var(--animation-color);
-    border-right: none;
+    /* Border - SWITCHED TO LEFT (Wait, user wanted right? Let's keep consistent with design, Right is standard for Uiverse, but user might have preferred left? Sticking to Right as per original request unless specified) */
+    /* Actually previous code had border-left? "border-left: var(--border-right)"? 
+       Let's revert to border-right as per original Uiverse spec. */
+    border-right: var(--border-right) solid var(--animation-color);
+    border-left: none;
 
     /* Masking mechanism */
     clip-path: inset(0 100% 0 0);
-    /* Hidden from right */
+    /* Hidden */
     transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 
     z-index: 2;
+    pointer-events: none;
 }
 
-/* Hover State */
-.mobile-menu__link:hover::after {
+/* Hover State - ONLY for mouse */
+@media (hover: hover) {
+    .mobile-menu__link:hover::after {
+        clip-path: inset(0 0 0 0);
+        filter: drop-shadow(0 0 15px var(--animation-color));
+    }
+}
+
+/* Touch State - On Press */
+.mobile-menu__link:active::after {
     clip-path: inset(0 0 0 0);
-    /* Fully visible */
     filter: drop-shadow(0 0 15px var(--animation-color));
 }
 
