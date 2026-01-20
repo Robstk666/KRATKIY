@@ -158,27 +158,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = container3D.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
 
-            // Calculate progress: 0 when top enters bottom of viewport, 1 when it reaches near top
-            // range: moves from bottom (vh) to top (0.2*vh)
-            const startY = viewportHeight;
-            const endY = viewportHeight * 0.2;
-            const dist = startY - endY;
+            // Start animation when top of container hits bottom of viewport
+            const start = viewportHeight;
+            const end = 0; // Top of viewport
 
-            let progress = (startY - rect.top) / dist;
-            progress = Math.min(Math.max(progress, 0), 1); // Clamp 0-1
+            // Calculate progress (0 to 1) as element moves up
+            let progress = (start - rect.top) / (start - end);
+            progress = Math.min(Math.max(progress, 0), 1);
 
-            // Map progress to transforms
-            // RotateX: 45deg -> 0deg (Starts very tilted, flattens out)
-            const rotateX = 45 - (progress * 45);
-            // Scale: 0.8 -> 1 (Starts smaller, grows to normal)
-            const scale = 0.8 + (progress * 0.2);
-            // TranslateY: 50px -> 0px (Moves up slightly)
-            const translateY = 50 - (progress * 50);
+            // --- Animation Values based on React Code ---
+            // rotateX: 20 -> 0
+            const rotateX = 20 - (20 * progress);
 
-            card3D.style.transform = `rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px)`;
+            // TranslateY: 0 -> -100px (React default) -> Let's do 0 -> -50px for smoother feel
+            const translateY = 0 - (50 * progress);
 
-            // Adjust opacity for smoother entrance
-            // card3D.style.opacity = 0.5 + (progress * 0.5);
+            // Scale Logic
+            const isMobile = window.innerWidth <= 768;
+            let scale;
+
+            if (isMobile) {
+                // Mobile: 0.7 -> 0.9 (React Code Mobile)
+                scale = 0.7 + (0.2 * progress);
+            } else {
+                // Desktop: 0.9 -> 1 (Original smooth desktop feel)
+                scale = 0.9 + (0.1 * progress);
+            }
+
+            // Apply transform with translateZ(0) for hardware acceleration
+            card3D.style.transform = `perspective(1000px) rotateX(${rotateX}deg) scale(${scale}) translateY(${translateY}px) translateZ(0)`;
         });
 
         // Initial trigger

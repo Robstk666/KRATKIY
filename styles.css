@@ -1587,13 +1587,15 @@ img {
     }
 
     .entrepreneur__text-border {
-        transform: translateZ(0) !important;
-        /* Keep composite layer but flat */
-        margin: 0 10px;
+        /* transform: handled by JS now */
+        margin: 0 auto;
+        /* Centered */
         padding: 3px;
         /* Ensure padding for border visibility */
         overflow: hidden;
         /* Ensure clip */
+        width: 90%;
+        /* Ensure it fits on mobile */
     }
 
     /* --- Books Section --- */
