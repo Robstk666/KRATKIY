@@ -365,78 +365,130 @@ img {
     margin: 24px 0;
 }
 
-/* Mobile Menu Links - TISEPSE Style */
+/* Mobile Menu Links - Uiverse Text Fill Style */
 .mobile-menu__link {
     position: relative;
     display: inline-block;
-    padding: 15px 30px;
-    border: 2px solid var(--accent);
-    /* Red Border */
+    padding: 10px 20px;
+    /* Reduced padding slightly */
     text-transform: uppercase;
-    color: #fff;
     text-decoration: none;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 24px;
+    /* Larger font for menu */
     font-family: var(--font-heading);
     background: transparent;
     margin: 10px 0;
-    border-radius: 0;
-    /* Reset border radius for this style */
-    box-shadow: none;
+    border: none;
+    /* No border */
+    color: transparent;
+    /* Hide real text */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+    /* Outline for base */
+    cursor: pointer;
     perspective: none;
     overflow: visible;
-    /* Override previous hidden */
     width: auto;
-    /* Reset width */
+    letter-spacing: 2px;
 }
 
-/* Background Masks to hide border segments */
+/* Base Text (White/Ghost) */
 .mobile-menu__link::before {
-    content: '';
+    content: attr(data-text);
     position: absolute;
-    top: 6px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% - 12px);
-    background-color: #000;
-    /* Match menu bg to "cut" border */
-    transition: 0.3s ease-in-out;
-    transform: scaleY(1);
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    /* Dim white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 1;
-    border-radius: 0;
-    background-image: none;
-    /* remove gradient if present */
+    transition: 0.5s;
+    pointer-events: none;
 }
 
-.mobile-menu__link:hover::before {
-    transform: scaleY(0);
-    animation: none;
-    /* disable rotate animation */
+/* Fill Text (Red) */
+.mobile-menu__link::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0%;
+    /* Start empty */
+    height: 100%;
+    color: var(--accent);
+    /* Red */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 2;
+    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    -webkit-text-stroke: 1px var(--accent);
+    border-right: 4px solid var(--accent);
+    /* The Leading Edge */
+    /* Clip needs to be careful with centering. 
+       Actually, standard centering + width transition works best if we anchor left? 
+       For centered text it's tricky. 
+       Let's use a simpler approach for centered text fill: 
+       Clip-path is better but width is requested style.
+       To make width fill from left on centered text, we need left alignment or careful positioning.
+    */
+}
+
+/* Fix for Centered Text Fill: 
+   Reset ::after to left: 0, translate: 0, but text-align center is tricky.
+   Better approach: Use flex centering on parent, anchor pseudos to fit content.
+   Let's ensure the parent fit-content.
+*/
+
+/* Revised Pseudos for Correct Fill */
+.mobile-menu__link {
+    /* ... keep base ... */
+    -webkit-text-stroke: 0;
+    /* Clear stroke on parent */
+    color: transparent;
+}
+
+.mobile-menu__link::before {
+    /* Base White Text */
+    transform: translate(0, 0);
+    top: 0;
+    left: 0;
+    color: #fff;
+    opacity: 0.5;
+    background: transparent;
 }
 
 .mobile-menu__link::after {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: -2px;
-    height: calc(100% + 4px);
-    width: calc(100% - 12px);
-    background-color: #000;
-    /* Match menu bg */
-    transition: 0.3s ease-in-out;
-    transform: scaleX(1);
-    transition-delay: 0.5s;
-    z-index: 1;
+    /* Red Fill */
+    transform: translate(0, 0);
+    top: 0;
+    left: 0;
+    width: 0%;
+    color: var(--accent);
+    border-right: 2px solid var(--accent);
+    filter: drop-shadow(0 0 5px var(--accent));
+    padding-right: 0;
+    /* Adjust for border */
 }
 
 .mobile-menu__link:hover::after {
-    transform: scaleX(0);
+    width: 100%;
+    filter: drop-shadow(0 0 15px var(--accent));
 }
 
 .mobile-menu__link span {
-    position: relative;
-    z-index: 3;
-    /* Above masks */
+    display: none;
+    /* No inner spans needed */
 }
 
 .mobile-menu__close {
