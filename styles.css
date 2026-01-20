@@ -1536,6 +1536,10 @@ img {
         /* Maintain aspect ratio */
         object-fit: contain;
         object-position: bottom center;
+        transform: scale(1.4);
+        /* Increase size by 40% */
+        transform-origin: bottom center;
+        /* Grow upwards */
     }
 
     /* --- Legend Section --- */
