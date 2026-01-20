@@ -1469,9 +1469,9 @@ img {
 
     /* --- Hero Section --- */
     .hero {
-        height: 100vh;
-        /* Allow dynamic height on mobile browsers */
-        min-height: 100vh;
+        height: 100dvh;
+        /* Dynamic viewport height */
+        min-height: 100dvh;
         background-position: center bottom;
     }
 
@@ -1505,14 +1505,14 @@ img {
     }
 
     .hero__layer--back {
-        top: 18%;
-        /* Moved slightly higher to make room */
+        top: 19%;
+        /* Adjusted closer */
     }
 
     .hero__layer--middle,
     .hero__layer--front {
-        top: 28%;
-        /* Move down to create separation from 'ANDREI' */
+        top: 27%;
+        /* Adjusted closer */
         line-height: normal;
         /* Restore normal line height */
     }
@@ -1536,10 +1536,9 @@ img {
         /* Maintain aspect ratio */
         object-fit: contain;
         object-position: bottom center;
-        transform: scale(1.4);
-        /* Increase size by 40% */
+        transform: scale(1.6);
+        /* Increased size by an extra 15% */
         transform-origin: bottom center;
-        /* Grow upwards */
     }
 
     /* --- Legend Section --- */
