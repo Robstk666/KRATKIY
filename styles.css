@@ -365,131 +365,6 @@ img {
     margin: 24px 0;
 }
 
-/* Mobile Menu Links - Uiverse Text Fill Style */
-.mobile-menu__link {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    /* Reduced padding slightly */
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 24px;
-    /* Larger font for menu */
-    font-family: var(--font-heading);
-    background: transparent;
-    margin: 10px 0;
-    border: none;
-    /* No border */
-    color: transparent;
-    /* Hide real text */
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
-    /* Outline for base */
-    cursor: pointer;
-    perspective: none;
-    overflow: visible;
-    width: auto;
-    letter-spacing: 2px;
-}
-
-/* Base Text (White/Ghost) */
-.mobile-menu__link::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 50%;
-    /* Center vertically */
-    left: 50%;
-    /* Center horizontally */
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    color: rgba(255, 255, 255, 0.5);
-    /* Dim white */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    transition: 0.5s;
-    pointer-events: none;
-}
-
-/* Fill Text (Red) */
-.mobile-menu__link::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0%;
-    /* Start empty */
-    height: 100%;
-    color: var(--accent);
-    /* Red */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    overflow: hidden;
-    z-index: 2;
-    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    -webkit-text-stroke: 1px var(--accent);
-    border-right: 4px solid var(--accent);
-    /* The Leading Edge */
-    /* Clip needs to be careful with centering. 
-       Actually, standard centering + width transition works best if we anchor left? 
-       For centered text it's tricky. 
-       Let's use a simpler approach for centered text fill: 
-       Clip-path is better but width is requested style.
-       To make width fill from left on centered text, we need left alignment or careful positioning.
-    */
-}
-
-/* Fix for Centered Text Fill: 
-   Reset ::after to left: 0, translate: 0, but text-align center is tricky.
-   Better approach: Use flex centering on parent, anchor pseudos to fit content.
-   Let's ensure the parent fit-content.
-*/
-
-/* Revised Pseudos for Correct Fill */
-.mobile-menu__link {
-    /* ... keep base ... */
-    -webkit-text-stroke: 0;
-    /* Clear stroke on parent */
-    color: transparent;
-}
-
-.mobile-menu__link::before {
-    /* Base White Text */
-    transform: translate(0, 0);
-    top: 0;
-    left: 0;
-    color: #fff;
-    opacity: 0.5;
-    background: transparent;
-}
-
-.mobile-menu__link::after {
-    /* Red Fill */
-    transform: translate(0, 0);
-    top: 0;
-    left: 0;
-    width: 0%;
-    color: var(--accent);
-    border-right: 2px solid var(--accent);
-    filter: drop-shadow(0 0 5px var(--accent));
-    padding-right: 0;
-    /* Adjust for border */
-}
-
-.mobile-menu__link:hover::after {
-    width: 100%;
-    filter: drop-shadow(0 0 15px var(--accent));
-}
-
-.mobile-menu__link span {
-    display: none;
-    /* No inner spans needed */
-}
 
 .mobile-menu__close {
     position: absolute;
@@ -1718,4 +1593,77 @@ img {
         align-items: center;
         /* Center nested flex items */
     }
+}
+/* Mobile Menu Links - Uiverse Text Fill Style (Solid Base) */
+.mobile-menu__link {
+    /* Base Button Style */
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 26px;
+    font-family: var(--font-heading);
+    background: transparent;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+    
+    /* User Requested Styles */
+    --border-right: 6px;
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --animation-color: var(--accent); /* Our RED */
+    
+    /* Base State: Solid White Text */
+    color: #fff; 
+    -webkit-text-stroke: 0;
+}
+
+/* The Hover Overlay (Red Text) */
+.mobile-menu__link::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 50%; /* Center properly */
+    transform: translateY(-50%); /* Center properly */
+    
+    /* Box Model */
+    box-sizing: border-box;
+    width: 0%;
+    height: 100%; /* Ensure it covers height */
+    
+    /* Text Styles */
+    color: var(--animation-color);
+    -webkit-text-stroke: 1px var(--animation-color);
+    
+    /* Border & Layout */
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow: hidden;
+    white-space: nowrap; /* Prevent wrapping */
+    
+    /* Animation */
+    transition: 0.5s;
+    
+    /* Fit positioning */
+    display: flex;
+    align-items: center;
+    padding: 10px 20px; /* Match parent padding */
+    inset: 0; /* Cover entire parent */
+    width: 0%; /* Start closed */
+}
+
+/* Hover State */
+.mobile-menu__link:hover::after {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color));
+}
+
+/* Cleanup */
+.mobile-menu__link::before {
+    display: none;
+}
+.mobile-menu__link span {
+    display: none;
 }
