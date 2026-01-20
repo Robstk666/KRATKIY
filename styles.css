@@ -74,6 +74,10 @@ img {
     transition-delay: 0.4s;
 }
 
+.delay-600 {
+    transition-delay: 0.6s;
+}
+
 .section-title {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -130,10 +134,74 @@ img {
     box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
 }
 
-.btn--outline {
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
+.contacts__icons-row {
+    display: flex;
+    gap: 60px;
+    /* Increased spacing */
+    margin-top: 40px;
+    align-items: center;
+}
+
+/* Contact Icons - Uiverse Style */
+.Btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    position: relative;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all .3s;
+    text-decoration: none;
+    /* Reset link style */
+}
+
+.svgContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.8px;
+    border-radius: 10px;
+    transition: all .3s;
+    border: 1px solid rgba(156, 156, 156, 0.466);
+    color: #fff;
+    /* Icon color */
+    font-size: 1.2rem;
+}
+
+.BG {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg,
+            rgba(229, 9, 20, 0.8) 0%,
+            rgba(100, 0, 0, 0.8) 100%);
+    z-index: -1;
+    border-radius: 9px;
+    pointer-events: none;
+    transition: all .3s;
+    opacity: 0;
+    /* Hidden by default */
+}
+
+.Btn:hover .BG {
+    transform: rotate(35deg);
+    transform-origin: bottom;
+    opacity: 1;
+    /* Show on hover */
+}
+
+.Btn:hover .svgContainer {
+    background-color: rgba(156, 156, 156, 0.2);
+    border-color: var(--accent);
 }
 
 .btn--outline:hover {
@@ -223,20 +291,66 @@ img {
     transition: all 0.3s ease;
 }
 
+/* --- Sticky Header Logic --- */
+.header--scrolled {
+    position: fixed;
+    top: 20px;
+    /* Floating slightly from top */
+    right: 20px;
+    left: auto;
+    width: auto;
+    padding: 0;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.header--scrolled .header__container {
+    display: block;
+}
+
+.header--scrolled .logo {
+    display: none;
+    /* Hide logo on scroll */
+}
+
+.header--scrolled .nav {
+    display: none;
+    /* Hide desktop nav */
+}
+
+.header--scrolled .burger-menu {
+    display: flex;
+    /* Force show burger */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 /* Mobile Menu */
 .mobile-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 100%;
+    /* Start off-screen */
+    width: 450px;
+    /* Fixed width for desktop "curtain" look */
+    max-width: 100%;
+    /* Full width on very small screens */
     height: 100vh;
     background-color: #000;
+    /* Solid black for better contrast with masks */
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle edge */
     z-index: 1000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-menu.active {
@@ -251,11 +365,78 @@ img {
     margin: 24px 0;
 }
 
+/* Mobile Menu Links - TISEPSE Style */
 .mobile-menu__link {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    border: 2px solid var(--accent);
+    /* Red Border */
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    font-weight: 700;
+    background: transparent;
+    margin: 10px 0;
+    border-radius: 0;
+    /* Reset border radius for this style */
+    box-shadow: none;
+    perspective: none;
+    overflow: visible;
+    /* Override previous hidden */
+    width: auto;
+    /* Reset width */
+}
+
+/* Background Masks to hide border segments */
+.mobile-menu__link::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% - 12px);
+    background-color: #000;
+    /* Match menu bg to "cut" border */
+    transition: 0.3s ease-in-out;
+    transform: scaleY(1);
+    z-index: 1;
+    border-radius: 0;
+    background-image: none;
+    /* remove gradient if present */
+}
+
+.mobile-menu__link:hover::before {
+    transform: scaleY(0);
+    animation: none;
+    /* disable rotate animation */
+}
+
+.mobile-menu__link::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: -2px;
+    height: calc(100% + 4px);
+    width: calc(100% - 12px);
+    background-color: #000;
+    /* Match menu bg */
+    transition: 0.3s ease-in-out;
+    transform: scaleX(1);
+    transition-delay: 0.5s;
+    z-index: 1;
+}
+
+.mobile-menu__link:hover::after {
+    transform: scaleX(0);
+}
+
+.mobile-menu__link span {
+    position: relative;
+    z-index: 3;
+    /* Above masks */
 }
 
 .mobile-menu__close {
@@ -483,18 +664,47 @@ img {
 .biography__summary h3 {
     font-family: var(--font-heading);
     font-size: 2rem;
-    margin-bottom: 24px;
+    margin-bottom: 60px;
+    /* Increased from 24px for more air */
     color: var(--text-primary);
 }
 
-.biography__facts li {
-    margin-bottom: 15px;
+.biography__facts {
+    position: relative;
     padding-left: 20px;
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid #E50914;
+    /* Continuous Timeline Line */
+    margin-left: 10px;
+    /* Offset for the line */
+}
+
+.biography__facts li {
+    position: relative;
+    margin-bottom: 30px;
+    /* Spacing between items */
+    padding-left: 20px;
+    /* Space between dot and text */
     font-family: var(--font-heading);
-    /* Updated to match Subtitle (Unbounded) */
     font-size: 1.05rem;
     font-weight: 400;
+    list-style: none;
+    /* Ensure no default bullets */
+}
+
+/* Red Dot on the Timeline */
+.biography__facts li::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    /* Center circle on the line (-20px padding - 7px half width) */
+    top: 6px;
+    /* Optically aligned with text cap height */
+    width: 12px;
+    height: 12px;
+    background-color: #E50914;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+    /* Glow effect */
 }
 
 .biography__photo img {
@@ -532,36 +742,47 @@ img {
 .books__grid {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 100px;
+    /* Increased from 40px to separate them more */
     flex-wrap: wrap;
 }
 
 .book-card {
     width: 300px;
-    /* Fixed width */
     height: 450px;
-    /* Fixed height */
-    overflow: hidden;
+    overflow: visible;
+    /* Changed from hidden to visible for 3D pop */
     border-radius: 8px;
-    transition: transform 0.3s ease;
     background: transparent;
+    perspective: 1000px;
+    /* Added perspective context */
 }
 
-.book-card:hover {
-    transform: translateY(-10px);
-}
+/* Hover lift effect removed on container, moved to image transform logic */
+/* .book-card:hover { transform: translateY(-10px); } */
 
 .book-card__image {
     width: 100%;
     height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    /* Important for 3D rotation */
+    transition: transform 0.1s ease-out;
+    /* Smooth follow with mouse */
+    border-radius: 20px;
 }
 
 .book-card__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ensure consistent fill */
     display: block;
+    border-radius: 20px;
+    /* TranslateZ creates depth */
+    transform: translateZ(50px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    /* Deep shadow */
+    transition: transform 0.2s ease-out;
 }
 
 /* LitRes Button - Glass to Red Hover */
@@ -741,7 +962,28 @@ img {
     grid-template-columns: repeat(4, 1fr);
     /* 4 Columns */
     gap: 30px;
-    margin-top: 40px;
+    margin-top: 80px;
+    /* Increased from 40px for more air */
+}
+
+/* Red Vertical Line (Dash) - Shortened */
+.legend__column {
+    position: relative;
+    padding-left: 20px;
+    /* Spacing text from dash */
+    height: fit-content;
+}
+
+.legend__column::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    /* Optically aligned with first line */
+    width: 4px;
+    height: 24px;
+    /* Approximate height of one line */
+    background-color: #E50914;
 }
 
 .legend__column p {
@@ -752,6 +994,8 @@ img {
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
     text-align: left;
+    margin: 0;
+    /* Clear margin to align with border */
 }
 
 @media (max-width: 1024px) {
@@ -969,5 +1213,229 @@ img {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* --- Text Updates & Spacing --- */
+#read-more-btn {
+    margin-top: 40px;
+    /* Increased separation */
+}
+
+.biography__timeline p {
+    font-family: var(--font-heading);
+    /* Unbounded (Born in 1992 style) */
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #dadada;
+}
+
+/* --- Uiverse Custom CTA Button --- */
+.uiverse-button {
+    margin: 0;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    /* Font & Layout */
+    --border-right: 6px;
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --animation-color: var(--accent);
+    /* Adapted to Red */
+    --fs-size: 1.5rem;
+    /* Adjusted size */
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-size: var(--fs-size);
+    font-family: var(--font-heading);
+    /* Unbounded */
+    position: relative;
+    text-transform: uppercase;
+    color: #fff;
+    /* Solid White */
+    /* -webkit-text-stroke: 1px var(--text-stroke-color); Removed stroke for solid fill */
+    margin-top: 30px;
+    display: block;
+    width: fit-content;
+    margin: 30px auto;
+}
+
+/* this is the text, when you hover on button */
+.hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    content: attr(data-text);
+    color: var(--animation-color);
+    width: 0%;
+    inset: 0;
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow: hidden;
+    transition: 0.5s;
+    -webkit-text-stroke: 1px var(--animation-color);
+}
+
+/* hover */
+.uiverse-button:hover .hover-text {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color));
+}
+
+/* --- Entrepreneur Animated Border Box --- */
+.entrepreneur-3d-wrapper {
+    perspective: 1000px;
+    /* Establish 3D space */
+    padding: 60px 0;
+    /* Space for the tilt */
+}
+
+.entrepreneur__text-border {
+    position: relative;
+    padding: 4px;
+    border-radius: 32px;
+    background: transparent;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    /* Margin handled by wrapper padding */
+    width: fit-content;
+
+    /* 3D Initial State */
+    transform-style: preserve-3d;
+    transform: rotateX(20deg) scale(0.9);
+    /* Start tilted */
+    will-change: transform;
+    /* Optimize for animation */
+    transition: transform 0.1s linear;
+    /* Smooth scroll updates */
+}
+
+/* The Running Red Line */
+.entrepreneur__text-border::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, #e50914);
+    animation: rotateBorder 4s linear infinite;
+    z-index: 1;
+}
+
+/* The Matte Card Background (Uiverse Style) - Matched to Site BG */
+.entrepreneur__text-content {
+    position: relative;
+    z-index: 2;
+    border-radius: 30px;
+    background: #000;
+    /* Matched to body background */
+    box-shadow: 15px 15px 30px rgb(20, 20, 20),
+        -15px -15px 30px rgb(60, 60, 60);
+    /* Adjusted shadows for black bg */
+    padding: 40px;
+    text-align: left;
+}
+
+/* Ensure animation keyframe exists (it does, but just ensuring context) */
+/* @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } */
+
+
+/* --- Mentions Section Styles --- */
+.mentions-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.mentions-image-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Center image in its col if needed */
+}
+
+/* Dim Pulsating Red Backlight */
+.mentions-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(40px);
+    border-radius: 50%;
+    z-index: 0;
+    animation: pulseRedGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseRedGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.mentions-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    /* Limit max size */
+    height: auto;
+    object-fit: contain;
+}
+
+.mentions-content {
+    text-align: left;
+}
+
+/* Responsive Mentions */
+/* --- Heartbeat Loader (Uiverse) --- */
+.loading svg {
+    width: 64px;
+    height: 48px;
+}
+
+.loading svg polyline {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+    fill: none;
+    stroke: rgba(229, 9, 20, 0.2);
+    /* Low opacity accent */
+}
+
+.loading svg polyline#front {
+    fill: none;
+    stroke: var(--accent);
+    /* Main Red */
+    stroke-dasharray: 48, 144;
+    stroke-dashoffset: 192;
+    animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+    72.5% {
+        opacity: 0;
+    }
+
+    to {
+        stroke-dashoffset: 0;
     }
 }

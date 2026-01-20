@@ -47,12 +47,12 @@
     <div class="mobile-menu">
         <button class="mobile-menu__close" aria-label="Закрыть меню">&times;</button>
         <ul class="mobile-menu__list">
-            <li><a href="#hero" class="mobile-menu__link">Главная</a></li>
-            <li><a href="#legend" class="mobile-menu__link">Легенда</a></li>
-            <li><a href="#biography" class="mobile-menu__link">Биография</a></li>
-            <li><a href="#books" class="mobile-menu__link">Книги</a></li>
-            <li><a href="#media" class="mobile-menu__link">Медиа</a></li>
-            <li><a href="#contacts" class="mobile-menu__link">Контакты</a></li>
+            <li><a href="#hero" class="mobile-menu__link"><span>Главная</span></a></li>
+            <li><a href="#legend" class="mobile-menu__link"><span>Легенда</span></a></li>
+            <li><a href="#biography" class="mobile-menu__link"><span>Биография</span></a></li>
+            <li><a href="#books" class="mobile-menu__link"><span>Книги</span></a></li>
+            <li><a href="#media" class="mobile-menu__link"><span>Медиа</span></a></li>
+            <li><a href="#contacts" class="mobile-menu__link"><span>Контакты</span></a></li>
         </ul>
     </div>
 
@@ -95,27 +95,38 @@
     <!-- Legend Section -->
     <section id="legend" class="section legend animate-on-scroll">
         <div class="container">
-            <h2 class="section-title" style="text-align: center;">Легенда. Мышление. Выбор пути</h2>
+            <h2 class="section-title" style="text-align: center; font-size: 48px;">
+                <span style="margin: 0 20px;">Легенда</span>
+                <span style="margin: 0 20px;">Мышление</span>
+                <span style="margin: 0 20px;">Выбор пути</span>
+            </h2>
+
             <div class="legend__grid">
-                <div class="legend__column">
-                    <p>Мой путь — это не линейная история успеха. Это череда решений, рисков, ошибок и перезапусков. Я
-                        рано понял простую вещь: стабильность — иллюзия, а рост всегда начинается с неопределённости.
+                <div class="legend__column animate-on-scroll">
+                    <p>Мой путь — это не линейная история успеха. Это череда решений, рисков, ошибок <br> и
+                        перезапусков.
+                        <br>Я
+                        рано понял простую вещь: стабильность — иллюзия, а рост всегда начинается<br> с
+                        неопределённости.
                     </p>
                 </div>
-                <div class="legend__column">
+                <div class="legend__column animate-on-scroll delay-200">
                     <p>Я видел бизнес без романтики — когда нет денег, когда партнёры подводят, когда один сбой
                         уничтожает месяцы работы. И именно в эти моменты формируется главное — мышление собственника.
                     </p>
                 </div>
-                <div class="legend__column">
-                    <p>Для меня бизнес — это не способ доказать что-то миру. Это инструмент свободы, влияния и
+                <div class="legend__column animate-on-scroll delay-400">
+                    <p>Для меня бизнес — это <br>не способ доказать что-то миру. Это инструмент свободы, влияния <br>и
                         ответственности. Свободы — выбирать путь. Влияния — создавать ценность. Ответственности —
-                        отвечать за решения и их последствия.</p>
+                        отвечать за решения<br> и их последствия.</p>
                 </div>
-                <div class="legend__column">
-                    <p>Я не верю в «волшебные кнопки» и быстрые схемы. Я верю в систему, дисциплину и умение видеть на
-                        несколько шагов вперёд.<br><br>Эта философия лежит в основе всех моих проектов, партнёрств и
-                        решений.</p>
+                <div class="legend__column animate-on-scroll delay-600">
+                    <p>Я не верю в «волшебные кнопки» и быстрые схемы. <br>Я верю в систему, дисциплину и умение видеть
+                        на
+                        несколько<br> шагов вперёд.<br>Эта философия лежит<br> в основе всех моих проектов, партнёрств
+                        <br>и
+                        решений.
+                    </p>
                 </div>
             </div>
         </div>
@@ -140,7 +151,10 @@
                         <li>Магистр государственного и муниципального управления (РАНХиГС)</li>
                         <li>С 2008 года — в профессиональном предпринимательстве</li>
                     </ul>
-                    <button id="read-more-btn" class="btn btn--outline">Читать подробнее</button>
+                    <button id="read-more-btn" class="uiverse-button" data-text="Читать подробнее">
+                        <span class="actual-text">&nbsp;Читать&nbsp;подробнее&nbsp;</span>
+                        <span aria-hidden="true" class="hover-text">&nbsp;Читать&nbsp;подробнее&nbsp;</span>
+                    </button>
                 </div>
                 <div class="biography__photo animate-on-scroll delay-200">
                     <img src="images/2.jpg" alt="Андрей Краткий Путь">
@@ -168,14 +182,49 @@
                             законодательстве сделали бизнес нерентабельным...</p>
                         <p>Я закрыл компанию, сосредоточился на автоломбардах и микрофинансах... Переехав в Москву, я
                             занялся недвижимостью, арендным бизнесом и новыми проектами.</p>
-                        <blockquote class="biography__quote">
+                        <p
+                            style="font-family: var(--font-heading); font-size: 1rem; line-height: 1.6; color: var(--text-primary); margin-top: 20px;">
                             Этой историей я хочу показать: возможно абсолютно всё. Главное — не бояться рисковать,
                             делать
                             выводы и начинать заново.
-                        </blockquote>
+                        </p>
                     </div>
                 </div>
             </dialog>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Serial Entrepreneur -->
+    <section class="section entrepreneur animate-on-scroll">
+        <div class="container text-center">
+            <h2 class="section-title"
+                style="font-family: var(--font-heading); text-align: center; margin-bottom: 20px;">
+                АНДРЕЙ КРАТКИЙ
+                <span
+                    style="display: block; font-size: 0.7em; margin-top: 10px; font-weight: 400; color: var(--text-secondary);">
+                    серийный предприниматель<br> и дальновидный инвестор
+                </span>
+            </h2>
+            <div class="entrepreneur-3d-wrapper">
+                <div class="entrepreneur__text-border">
+                    <div class="entrepreneur__text-content">
+                        <p
+                            style="font-family: var(--font-heading); font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 20px;">
+                            За 15+ лет предпринимательства я запускал и развивал проекты в IT, маркетплейсах,
+                            инвестициях и
+                            реальном секторе. <br>Я не просто участник рынка — я понимаю его движущие силы <br>и умею
+                            действовать
+                            наперёд.
+                        </p>
+                        <p
+                            style="font-family: var(--font-heading); font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">
+                            Это история не о случайностях, а о стратегии, упорстве <br>и системности — именно их я
+                            предлагаю
+                            партнёрам и командам.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -202,33 +251,47 @@
 
             <div class="books__cta-container" style="position: relative; margin-top: 60px; text-align: center;">
 
-                <!-- Chaotic Arrow Left -->
-                <svg class="arrow-doodle arrow-left" width="100" height="80" viewBox="0 0 100 80"
-                    style="position: absolute; top: -50px; left: 35%; transform: translateX(-100%) rotate(-10deg);">
-                    <path d="M10,10 Q50,5 80,60" fill="none" stroke="#E50914" stroke-width="2"
-                        marker-end="url(#arrowhead)" />
-                </svg>
-
-                <!-- Chaotic Arrow Right -->
-                <svg class="arrow-doodle arrow-right" width="100" height="80" viewBox="0 0 100 80"
-                    style="position: absolute; top: -50px; right: 35%; transform: translateX(100%) rotate(10deg) scaleX(-1);">
-                    <path d="M10,10 Q50,5 80,60" fill="none" stroke="#E50914" stroke-width="2"
-                        marker-end="url(#arrowhead)" />
-                </svg>
-
-                <!-- Defs for markers -->
-                <svg style="position: absolute; width: 0; height: 0; overflow: hidden;">
-                    <defs>
-                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#E50914" />
-                        </marker>
-                    </defs>
-                </svg>
-
-                <a href="https://www.litres.ru/author/andrey-kratkiy/" target="_blank"
-                    class="btn btn--secondary btn--litres">
-                    Читать на Литрес
+                <a href="https://www.litres.ru/author/andrey-kratkiy/" target="_blank" class="uiverse-button"
+                    data-text="Читать на Литрес">
+                    <span class="actual-text">&nbsp;Читать&nbsp;на&nbsp;Литрес&nbsp;</span>
+                    <span aria-hidden="true" class="hover-text">&nbsp;Читать&nbsp;на&nbsp;Литрес&nbsp;</span>
                 </a>
+                <!-- Added Description for Books -->
+                <p
+                    style="margin-top: 20px; font-family: var(--font-heading); font-size: 1rem; color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Книги — это концентрат практики, ошибок и решений, которые можно применять сразу.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Media & Mentions -->
+    <section class="section media-mentions animate-on-scroll">
+        <div class="container">
+            <div class="mentions-grid">
+                <!-- Left Column: Image with Red Backlight -->
+                <div class="mentions-image-wrapper">
+                    <div class="mentions-glow"></div>
+                    <img src="images/5.png" alt="Андрей Краткий" class="mentions-image">
+                </div>
+
+                <!-- Right Column: Text Content -->
+                <div class="mentions-content">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">Где обо мне говорят</h2>
+                    <div
+                        style="font-family: var(--font-heading); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 40px;">
+                        <p style="margin-bottom: 20px;">Интервью, подкасты и выступления — я открыт к диалогу и
+                            совместным форматам.</p>
+                        <p>Если вы — медиа, журнал или подкаст, мы можем создать контент о бизнесе, инвестициях и личном
+                            развитии.</p>
+                    </div>
+
+                    <!-- Custom CTA Button -->
+                    <a href="#contacts" class="uiverse-button" data-text="Связаться со мной" style="margin: 0;">
+                        <span class="actual-text">&nbsp;Связаться&nbsp;со&nbsp;мной&nbsp;</span>
+                        <span aria-hidden="true" class="hover-text">&nbsp;Связаться&nbsp;со&nbsp;мной&nbsp;</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -240,29 +303,62 @@
             <!-- Subtitle removed -->
 
             <!-- Video Block -->
-            <div class="gif-container animate-on-scroll">
-                <div class="gif-wrapper">
-                    <video class="gif-content" autoplay loop muted playsinline>
-                        <source src="images/1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+            <!-- Video Block Row -->
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+                <!-- Video 1 -->
+                <div class="gif-container animate-on-scroll">
+                    <div class="gif-wrapper">
+                        <video class="gif-content" autoplay loop muted playsinline>
+                            <source src="images/1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="gif-container animate-on-scroll">
+                    <div class="gif-wrapper">
+                        <video class="gif-content" autoplay loop muted playsinline>
+                            <source src="images/2.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="gif-container animate-on-scroll">
+                    <div class="gif-wrapper">
+                        <video class="gif-content" autoplay loop muted playsinline>
+                            <source src="images/3.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
 
-            <div class="media__links">
-                <a href="https://www.youtube.com/@andrei_kratkiy" target="_blank" class="media-card youtube">
-                    <span class="media-card__icon">▶</span>
-                    <span class="media-card__title">YouTube</span>
+            <!-- Media Links with Heartbeat -->
+            <div class="media__links"
+                style="display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap;">
+                <a href="https://www.youtube.com/@Kratkiy_Andrei" target="_blank" class="uiverse-button"
+                    data-text="YouTube" style="margin: 0;">
+                    <span class="actual-text">&nbsp;YouTube&nbsp;</span>
+                    <span aria-hidden="true" class="hover-text">&nbsp;YouTube&nbsp;</span>
                 </a>
-                <a href="https://rutube.ru/channel/30747568/" target="_blank" class="media-card rutube">
-                    <span class="media-card__icon">▶</span>
-                    <span class="media-card__title">RuTube</span>
+
+                <!-- Heartbeat Animation -->
+                <div class="loading">
+                    <svg width="64px" height="48px">
+                        <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="back"></polyline>
+                        <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24" id="front"></polyline>
+                    </svg>
+                </div>
+
+                <a href="https://rutube.ru/channel/24645367/" target="_blank" class="uiverse-button" data-text="RuTube"
+                    style="margin: 0;">
+                    <span class="actual-text">&nbsp;RuTube&nbsp;</span>
+                    <span aria-hidden="true" class="hover-text">&nbsp;RuTube&nbsp;</span>
                 </a>
             </div>
 
             <div class="media__info" style="text-align: center; margin-top: 40px;">
                 <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: var(--text-secondary);">
-                    Интервью, подкасты и выступления — я открыт к диалогу и совместным форматам.
+                    Каждое видео — практический урок о росте, <br>
+                    масштабировании и взгляде за горизонт.
                 </p>
             </div>
         </div>
@@ -276,21 +372,25 @@
                 <p>Для партнёрств, инвестиций, интервью и совместных проектов.</p>
 
                 <div class="contacts__icons-row">
-                    <a href="tel:+79995290001" class="contact-icon" title="Телефон">
-                        <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+79995290001" class="Btn" title="Телефон">
+                        <span class="svgContainer"><i class="fas fa-phone-alt"></i></span>
+                        <span class="BG"></span>
                     </a>
-                    <a href="mailto:andorboy1992@gmail.com" class="contact-icon" title="Email">
-                        <i class="fas fa-envelope"></i>
+                    <a href="mailto:andorboy1992@gmail.com" class="Btn" title="Email">
+                        <span class="svgContainer"><i class="fas fa-envelope"></i></span>
+                        <span class="BG"></span>
                     </a>
-                    <a href="https://t.me/kratkiy_andrei" target="_blank" class="contact-icon" title="Telegram">
-                        <i class="fab fa-telegram-plane"></i>
+                    <a href="https://t.me/kratkiy_andrei" target="_blank" class="Btn" title="Telegram">
+                        <span class="svgContainer"><i class="fab fa-telegram-plane"></i></span>
+                        <span class="BG"></span>
                     </a>
-                    <a href="https://www.instagram.com/andrei_kratkiy" target="_blank" class="contact-icon"
-                        title="Instagram">
-                        <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/andrei_kratkiy" target="_blank" class="Btn" title="Instagram">
+                        <span class="svgContainer"><i class="fab fa-instagram"></i></span>
+                        <span class="BG"></span>
                     </a>
-                    <a href="https://m.vk.com/andrei_kratkiy" target="_blank" class="contact-icon" title="VK">
-                        <i class="fab fa-vk"></i>
+                    <a href="https://m.vk.com/andrei_kratkiy" target="_blank" class="Btn" title="VK">
+                        <span class="svgContainer"><i class="fab fa-vk"></i></span>
+                        <span class="BG"></span>
                     </a>
                 </div>
             </div>
@@ -306,15 +406,40 @@
                     <div class="form-group">
                         <textarea placeholder="Сообщение" rows="4" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn--gold">Отправить</button>
+                    <button type="submit" class="uiverse-button" data-text="Отправить">
+                        <span class="actual-text">&nbsp;Отправить&nbsp;</span>
+                        <span aria-hidden="true" class="hover-text">&nbsp;Отправить&nbsp;</span>
+                    </button>
+                    <p style="font-size: 10px; color: #555; margin-top: 15px; text-align: center; line-height: 1.4;">
+                        Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с
+                        <a href="policy.html" target="_blank" style="color: #777; text-decoration: underline;">политикой
+                            конфиденциальности</a>.
+                    </p>
                 </form>
+                <!-- New Footer Text -->
+                <p
+                    style="margin-top: 30px; font-family: var(--font-heading); color: var(--text-secondary); font-size: 0.95rem; text-align: left;">
+                    Если вы предприниматель, инвестор или стартапер и ищете новый уровень — приглашаю к сотрудничеству.
+                    Мой опыт, система и мышление могут ускорить ваш рост.
+                </p>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Andrey Kratkiy. All rights reserved.</p>
+        <div class="container"
+            style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; flex-wrap: wrap; gap: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <p>&copy; 2026 Andrey Kratkiy. All rights reserved.</p>
+                <a href="policy.html" target="_blank"
+                    style="color: var(--text-secondary); font-size: 12px; text-decoration: none; opacity: 0.7; transition: opacity 0.3s;">Политика
+                    конфиденциальности</a>
+            </div>
+            <a href="https://www.synapse-studio72h.ru/" target="_blank"
+                style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--text-secondary); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease;"
+                onmouseover="this.style.color='#E50914'" onmouseout="this.style.color='var(--text-secondary)'">
+                MADE BY SYNAPSE72
+            </a>
         </div>
     </footer>
 
