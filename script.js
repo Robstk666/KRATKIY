@@ -193,4 +193,68 @@ document.addEventListener('DOMContentLoaded', () => {
         window.dispatchEvent(new Event('scroll'));
     }
 
+    // --- Contact Form Submission (Telegram) ---
+    const contactForm = document.getElementById('contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('form-name');
+            const phoneInput = document.getElementById('form-phone');
+            const messageInput = document.getElementById('form-message');
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+            // UI Feedback: Loading
+            const originalHtml = submitBtn.innerHTML;
+
+            // Set Loading State
+            submitBtn.disabled = true;
+            submitBtn.querySelector('.actual-text').textContent = 'Отправка...';
+            submitBtn.querySelector('.hover-text').textContent = 'Отправка...';
+
+            const formData = {
+                name: nameInput.value,
+                phone: phoneInput.value,
+                message: messageInput.value
+            };
+
+            try {
+                const response = await fetch('/api/telegram', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    // Success State
+                    submitBtn.querySelector('.actual-text').textContent = 'Отправлено! ✅';
+                    submitBtn.querySelector('.hover-text').textContent = 'Отправлено! ✅';
+
+                    // Clear form
+                    contactForm.reset();
+
+                    setTimeout(() => {
+                        // Restore button after 3 seconds
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalHtml;
+                    }, 3000);
+                } else {
+                    const errData = await response.json();
+                    console.error('Server Error:', errData);
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Произошла ошибка при отправке. Попробуйте еще раз.');
+
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalHtml;
+            }
+        });
+    }
+
 });
