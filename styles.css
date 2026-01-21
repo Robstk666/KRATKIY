@@ -1596,120 +1596,75 @@ img {
 }
 
 
-/* Hover State */
-.mobile-menu__link:hover::after {
-    clip-path: inset(0 0 0 0);
-    /* Fully visible */
-    filter: drop-shadow(0 0 15px var(--animation-color));
-}
-
-/* Cleanup */
-.mobile-menu__link span {
-    display: none;
-}
-
-/* Mobile Menu Links - Uiverse Text Fill Style (Double Pseudo Fixed) */
+/* Mobile Menu Links - Uiverse Structure (Exact Match) */
 .mobile-menu__link {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
-    /* Neater, tighter padding */
+    padding: 0;
+    /* Remove padding to rely on text size */
+    margin: 15px 0;
+    /* Spacing handled by margin */
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 800;
-    /* Bold but legible */
-    font-size: 18px;
-    /* Reduced to 18px as requested ("akkuratnee") */
+    font-size: 20px;
     font-family: var(--font-heading);
     background: transparent;
-    margin: 8px 0;
-    /* Tighter spacing */
     border: none;
     cursor: pointer;
     letter-spacing: 2px;
-
-    /* Layout */
-    color: transparent;
-    /* Hide DOM text to prevent misalignment */
-    -webkit-text-stroke: 0;
-
     /* Variables */
     --border-right: 4px;
-    /* Used for border width */
     --animation-color: var(--accent);
+    color: transparent;
+    /* Hide text if any leaks */
 }
 
-/* Layer 1: Base Text (Solid White) */
-.mobile-menu__link::before {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    /* Cover entire button */
-
-    /* Alignment */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* Appearance */
+/* Base Text (White) - Defines Layout Size */
+.mobile-menu__link .actual-text {
     color: #fff;
-    white-space: nowrap;
-    transition: 0.5s;
+    position: relative;
     z-index: 1;
 }
 
-/* Layer 2: Hover Text (Red Fill) */
-.mobile-menu__link::after {
-    content: attr(data-text);
+/* Hover Overlay (Red) - Absolute on top */
+.mobile-menu__link .hover-text {
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    /* Box & Alignment */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    /* Pin text to left */
-    padding: 12px 25px;
-    /* Match Parent Padding */
-
-    /* Box Model */
-    box-sizing: border-box;
+    inset: 0;
     width: 0%;
     /* Start closed */
-    overflow: hidden;
-    /* Hide content */
-    white-space: nowrap;
-    /* Prevent wrapping */
-
-    /* Appearance */
     color: var(--animation-color);
-    background: transparent;
-
-    /* Border - RIGHT (Leading Edge) */
+    overflow: hidden;
+    white-space: nowrap;
     border-right: var(--border-right) solid var(--animation-color);
-    border-left: none;
-
-    /* Animation */
-    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-
     z-index: 2;
+    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    /* No Flex Centering here - relies on matching layout of actual-text */
     pointer-events: none;
 }
 
-/* Hover State - ONLY for mouse */
+/* Hover State */
 @media (hover: hover) {
-    .mobile-menu__link:hover::after {
+    .mobile-menu__link:hover .hover-text {
         width: 100%;
         filter: drop-shadow(0 0 15px var(--animation-color));
     }
 }
 
-/* Touch State - On Press */
-.mobile-menu__link:active::after {
+/* Touch State */
+.mobile-menu__link:active .hover-text {
     width: 100%;
     filter: drop-shadow(0 0 15px var(--animation-color));
+}
+
+/* Remove old pseudo cleanup if present */
+.mobile-menu__link::before,
+.mobile-menu__link::after {
+    display: none;
+}
+
+width: 100%;
+filter: drop-shadow(0 0 15px var(--animation-color));
 }
 
 /* Cleanup */
