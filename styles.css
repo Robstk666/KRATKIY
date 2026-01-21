@@ -1663,11 +1663,3 @@ img {
     display: none;
 }
 
-width: 100%;
-filter: drop-shadow(0 0 15px var(--animation-color));
-}
-
-/* Cleanup */
-.mobile-menu__link span {
-    display: none;
-}
