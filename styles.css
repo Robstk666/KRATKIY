@@ -1669,23 +1669,30 @@ img {
     /* Box & Alignment */
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    /* Pin text to left */
+    padding: 12px 25px;
+    /* Match Parent Padding */
+
+    /* Box Model */
+    box-sizing: border-box;
+    width: 0%;
+    /* Start closed */
+    overflow: hidden;
+    /* Hide content */
+    white-space: nowrap;
+    /* Prevent wrapping */
 
     /* Appearance */
     color: var(--animation-color);
     background: transparent;
 
-    /* Border - SWITCHED TO LEFT (Wait, user wanted right? Let's keep consistent with design, Right is standard for Uiverse, but user might have preferred left? Sticking to Right as per original request unless specified) */
-    /* Actually previous code had border-left? "border-left: var(--border-right)"? 
-       Let's revert to border-right as per original Uiverse spec. */
+    /* Border - RIGHT (Leading Edge) */
     border-right: var(--border-right) solid var(--animation-color);
     border-left: none;
 
-    /* Masking mechanism */
-    clip-path: inset(0 100% 0 0);
-    /* Hidden */
-    transition: clip-path 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    /* Animation */
+    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 
     z-index: 2;
     pointer-events: none;
@@ -1694,14 +1701,14 @@ img {
 /* Hover State - ONLY for mouse */
 @media (hover: hover) {
     .mobile-menu__link:hover::after {
-        clip-path: inset(0 0 0 0);
+        width: 100%;
         filter: drop-shadow(0 0 15px var(--animation-color));
     }
 }
 
 /* Touch State - On Press */
 .mobile-menu__link:active::after {
-    clip-path: inset(0 0 0 0);
+    width: 100%;
     filter: drop-shadow(0 0 15px var(--animation-color));
 }
 
