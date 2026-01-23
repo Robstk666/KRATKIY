@@ -481,12 +481,13 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: center;
+    /* Center content horizontally */
     height: 100%;
     padding-bottom: 40px;
-    /* Reduced padding to push items lower */
     gap: 20px;
-    padding-left: 8%;
+    padding-left: 0;
+    /* Remove offset */
     pointer-events: none;
     /* Allow clicks to pass through empty areas */
 }
