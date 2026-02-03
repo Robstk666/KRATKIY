@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('/api/telegram', {
+                const response = await fetch('api/telegram.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -242,13 +242,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         submitBtn.innerHTML = originalHtml;
                     }, 3000);
                 } else {
-                    const errData = await response.json();
-                    console.error('Server Error:', errData);
-                    throw new Error('Network response was not ok');
+                    // Try to parse JSON, fail back to text/status
+                    let errorText = response.statusText;
+                    try {
+                        const errData = await response.json();
+                        errorText = JSON.stringify(errData) || errorText;
+                    } catch (e) {
+                        // response was not JSON
+                    }
+                    console.error('Server Error:', response.status, errorText);
+                    throw new Error(`Server Error ${response.status}: ${errorText}`);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Произошла ошибка при отправке. Попробуйте еще раз.');
+
+                // Show more detailed error to the user for debugging
+                let errorMessage = 'Произошла ошибка при отправке. Попробуйте еще раз.';
+                if (error.message) {
+                    errorMessage += `\nДетали: ${error.message}`;
+                }
+
+                alert(errorMessage);
 
                 // Restore button
                 submitBtn.disabled = false;

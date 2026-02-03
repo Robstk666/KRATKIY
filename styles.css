@@ -1665,3 +1665,186 @@ img {
 .mobile-menu__link::after {
     display: none;
 }
+
+/* --- Merch Section --- */
+.merch {
+    padding-bottom: 80px;
+}
+
+.merch__grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    /* Ensure stacking on mobile */
+}
+
+/* Card Styles */
+.card {
+    /* Fixed width/height as requested, but responsive friendly */
+    width: 280px;
+    /* Slightly wider than 195px to fit content better, user asked for specific but 195 is very narrow */
+    height: 380px;
+    /* Taller for the image */
+    background: #e6e6e6;
+    /* Light gray for contrast with black shirts */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    /* Dark text for light bg */
+    transition: 0.2s ease-in-out;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+    /* Keep image inside */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Flex wrap adjustment for mobile */
+@media (max-width: 900px) {
+    .merch__grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.img {
+    height: 90%;
+    /* Start big */
+    position: absolute;
+    transition: 0.3s ease-in-out;
+    z-index: 1;
+    object-fit: contain;
+    bottom: 0;
+    /* Anchor to bottom so head isn't cut off if we crop */
+}
+
+.textBox {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: 0.2s ease-in-out;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.85);
+    /* Readability backing */
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.textBox>.head {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: var(--font-heading);
+    margin: 0;
+}
+
+.textBox>span {
+    font-size: 12px;
+    color: #555;
+}
+
+.shop-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #E50914;
+    /* Red accent */
+    font-size: 16px;
+}
+
+/* Hover Effects */
+.card:hover>.textBox {
+    opacity: 1;
+}
+
+.card:hover>.img {
+    height: 65%;
+    /* Shrink image to make room */
+    filter: blur(7px);
+    animation: anim 3s infinite;
+}
+
+@keyframes anim {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: scale(1.04);
+}
+/* --- Custom Merch Cart Button --- */
+.btn-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+}
+
+.btn-cart::after {
+  content: attr(data-quantity);
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: white;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 115%;
+}
+
+.icon-cart {
+  width: 24.38px;
+  height: 30.52px;
+  transition: .2s linear;
+}
+
+.icon-cart path {
+  fill: rgb(240, 8, 8);
+  transition: .2s linear;
+}
+
+.btn-cart:hover > .icon-cart {
+  transform: scale(1.2);
+}
+
+.btn-cart:hover > .icon-cart path {
+  fill: rgb(186, 34, 233);
+}
+
+.btn-cart:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+
+/* Extra tweak: prevent conflict if button is used inside anchor */
+a.card .btn-cart {
+    pointer-events: none; /* Let the click pass through to the card link */
+}
